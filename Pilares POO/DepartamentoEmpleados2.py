@@ -43,10 +43,6 @@ class Departamento:
     def add_empleados(self, empleado):
         self.empleados.append(empleado)
         empleado.departamento = self
-    
-    def exc_empleados(self, empleado): # Eliminar
-        self.empleados.remove(empleado)
-        departamento.empleados = self
 
 class Departamentos:
     def __init__(self, lista):
@@ -55,10 +51,6 @@ class Departamentos:
     
     def add_departamentos(self, departamento): # Añadir
         self.departamentos.append(departamento)
-        departamento.departamentos = self
-    
-    def exc_departamentos(self, departamento): # Eliminar
-        self.departamentos.remove(departamento)
         departamento.departamentos = self
 
 departamentos = Departamentos('departamentos')
@@ -70,7 +62,7 @@ while opcion != 4:
                        '\n[2] Ver Departamentos'
                        '\n[3] Gestionar Departamentos'
                        '\n[4] Salir'
-                       '\nIngrese una opción: '))
+                       '\nIngrese una opción: ')) 
     
     print('------------------------------------------------------')
     
