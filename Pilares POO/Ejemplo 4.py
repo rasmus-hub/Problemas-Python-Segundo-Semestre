@@ -1,4 +1,4 @@
-# Herencia o generalización
+# Relación Herencia o generalización
 
 class Vehiculo: # Clase super()
     def __init__(self, marca, modelo, year):

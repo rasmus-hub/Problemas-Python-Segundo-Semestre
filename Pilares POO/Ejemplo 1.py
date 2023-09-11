@@ -1,33 +1,36 @@
+# Relación Asociación
+
 class Cliente:
     def __init__(self, id, nombre):
         self.id = id
         self.nombre = nombre
-
 
 class Pedido:
     def __init__(self, id_pedido, monto):
         self.id_pedido = id_pedido
         self.monto = monto
 
+# Objetos de la clase cliente
 
-# Crear objetos para ambas clases
-# Objeto de la clase Cliente
+cliente1 = Cliente(1, 'Victor')
+cliente2 = Cliente(2, 'Gustavo')
 
-cliente1 = Cliente(1, 'Gustavo')
+# Objetos de la clase pedido
 
-cliente2 = Cliente(2, 'Matías')
+pedido1 = Pedido(101, 80000)
+pedido2 = Pedido(202, 50000)
 
-# Objeto de la clase Pedido
+# Se realiza la relación asociación
 
-pedido1 = Pedido(101, 800000)
+cliente1.Pedido = pedido1 # type: ignore
+cliente2.Pedido = pedido2 # type: ignore
 
-# Realizamos la relación asociación entre ambas clases
+# Mostrar resultados
 
-cliente1.Pedido = pedido1 # La informacíon del pedido1 se almacena en cliente1
+print(f'El cliente {cliente1.nombre} ha hecho '
+      f'\nun pedido con el id {cliente1.Pedido.id_pedido}' # type: ignore
+      f'\ncon un monto de ${cliente1.Pedido.monto}') # type: ignore
 
-# Mostramos resultados
-
-print(f'El cliente {cliente1.nombre} ha realizado un pedido con el id '
-      f'{cliente1.Pedido.id_pedido} por un monto de ${cliente1.Pedido.monto}')
-
-print(cliente2.id, cliente2.nombre)
+print(f'El cliente {cliente2.nombre} ha hecho '
+      f'\nun pedido con el id {cliente2.Pedido.id_pedido}' # type: ignore
+      f'\ncon un monto de ${cliente2.Pedido.monto}') # type: ignore
