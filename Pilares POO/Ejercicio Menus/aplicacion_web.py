@@ -133,10 +133,11 @@ while True:
     nombre_usuario = input('[ Inicie Sesión ]\nNombre de Usuario: ')
     contrasena_usuario = input('Contraseña: ')
 
+    limpiar_consola()
+
     for n, c in base_datos.usuarios[0].items():
         if nombre_usuario == n and contrasena_usuario == c:
             menu_cliente(nombre_usuario)
     for n, c in base_datos.usuarios[1].items():
         if nombre_usuario == n and contrasena_usuario == c:
             menu_administrador(nombre_usuario)
-    limpiar_consola()
