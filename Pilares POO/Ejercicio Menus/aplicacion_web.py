@@ -11,7 +11,7 @@ def limpiar_consola():
     input()
     os.system('cls')
 
-class Usuario:
+class Usuario: # Relación Heredación
     def __init__(self, nombre, contrasena):
         self.nombre = nombre
         self.contrasena = contrasena
@@ -25,12 +25,12 @@ class Administrador(Usuario):
         super().__init__(nombre, contrasena)
     
     def cambiar_nombre(self, nombre, nuevo_nombre):
-        for lista in base_datos.usuarios:
-            for n, c in lista.items():
-                if n == nombre:
-                    base_datos.usuarios[0][nuevo_nombre] = base_datos.usuarios[0].pop(nombre)
+        base_datos.usuarios[0][nuevo_nombre] = base_datos.usuarios[0].pop(nombre)
+
+    def cambiar_contrasena(self, nombre, nueva_contrasena):
+        base_datos.usuarios[0][nombre] = nueva_contrasena
         
-class BaseDatos:
+class BaseDatos: # Relación Agregación
     def __init__(self, nombre):
         self.nombre = nombre
         self.usuarios = [{},{}] # Clientes, Administradores
@@ -40,6 +40,8 @@ class BaseDatos:
             self.usuarios[0][nombre] = contrasena
         elif rol == 'Administrador':
             self.usuarios[1][nombre] = contrasena
+
+# Se hacen dos menús diferentes debido a la accesibilidad de cada uno de los usuarios
 
 def menu_administrador(nombre_usuario):
     opcion = None
@@ -57,7 +59,7 @@ def menu_administrador(nombre_usuario):
             case 1:
                 i = 1
                 for n, c in base_datos.usuarios[0].items():
-                    print(f'Cliente {i}: {n}')
+                    print(f'Cliente {i}: {n} | Contraseña: {c}')
                     i += 1
             case 2:
                 i = 1
@@ -67,9 +69,13 @@ def menu_administrador(nombre_usuario):
             case 3:
                 nombre = input('Ingrese el nombre del cliente: ')
                 nombre_nuevo = input('Ingrese el nombre nuevo: ')
-                nombre_usuario.cambiar_nombre(nombre, nombre_nuevo)
+                administrador1.cambiar_nombre(nombre, nombre_nuevo)
+            case 4:
+                nombre = input('Ingrese el nombre del cliente: ')
+                nueva_contrasena = input('Ingrese la contraseña nueva: ')
+                administrador1.cambiar_contrasena(nombre, nueva_contrasena)
             case _:
-                if opcion != 3:
+                if opcion != 5:
                     print(f'La opción {opcion} es inválida')
         
         limpiar_consola()
@@ -106,13 +112,13 @@ base_datos = BaseDatos('base_datos')
 
 # Creamos los objetos de la clase cliente
 
-Matias = Cliente('Matias', '123321')
-Bastian = Cliente('Bastian', '321123')
+cliente1 = Cliente('Matias', '123321')
+cliente2 = Cliente('Bastian', '321123')
 
 # Creamos los objetos de la clase administrador
 
-Gustavo = Administrador('Gustavo', 'Esnupi12')
-Alfredo = Administrador('Alfredo', '12Olava')
+administrador1 = Administrador('Gustavo', 'Esnupi12')
+administrador2 = Administrador('Alfredo', '12Olava')
 
 # Añadimos a los usuarios creados a la base de datos
 
@@ -123,12 +129,14 @@ base_datos.agregar_usuarios('Administrador', administrador2.nombre, administrado
 
 # Inicio de sesión
 
-nombre_usuario = input('[ Inicie Sesión ]\nNombre de Usuario: ')
-contrasena_usuario = input('Contraseña: ')
+while True:
+    nombre_usuario = input('[ Inicie Sesión ]\nNombre de Usuario: ')
+    contrasena_usuario = input('Contraseña: ')
 
-for n, c in base_datos.usuarios[0].items():
-    if nombre_usuario == n and contrasena_usuario == c:
-        menu_cliente(nombre_usuario)
-for n, c in base_datos.usuarios[1].items():
-    if nombre_usuario == n and contrasena_usuario == c:
-        menu_administrador(nombre_usuario)
+    for n, c in base_datos.usuarios[0].items():
+        if nombre_usuario == n and contrasena_usuario == c:
+            menu_cliente(nombre_usuario)
+    for n, c in base_datos.usuarios[1].items():
+        if nombre_usuario == n and contrasena_usuario == c:
+            menu_administrador(nombre_usuario)
+    limpiar_consola()
