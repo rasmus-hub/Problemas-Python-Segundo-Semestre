@@ -1,6 +1,7 @@
 class Producto:
     def __init__(self, nombre):
         self.nombre = nombre
+        self.tienda = None
 
 class Tienda:
     def __init__(self):
